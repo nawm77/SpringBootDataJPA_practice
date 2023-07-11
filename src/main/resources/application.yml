@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: postgres
+    password: postgres
+    name: hibernate
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/hibernate
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+    hibernate:
+      ddl-auto: create-drop
+logging:
+  level:
+    blog: warn
+    org: warn
+    hibernate:
+      sql: debug
+      type:
+        descriptor: trace
