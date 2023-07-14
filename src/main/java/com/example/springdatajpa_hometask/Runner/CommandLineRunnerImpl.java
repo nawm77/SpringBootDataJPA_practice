@@ -4,10 +4,7 @@ import com.example.springdatajpa_hometask.Model.Bike;
 import com.example.springdatajpa_hometask.Model.Car;
 import com.example.springdatajpa_hometask.Model.Plane;
 import com.example.springdatajpa_hometask.Model.Truck;
-import com.example.springdatajpa_hometask.Service.BikeService;
-import com.example.springdatajpa_hometask.Service.CarService;
-import com.example.springdatajpa_hometask.Service.PlaneService;
-import com.example.springdatajpa_hometask.Service.TruckService;
+import com.example.springdatajpa_hometask.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -21,13 +18,15 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
     private final BikeService bikeService;
     private final TruckService truckService;
     private final PlaneService planeService;
+    private final VehiclePriceService vehiclePriceService;
 
     @Autowired
-    public CommandLineRunnerImpl(CarService carService, BikeService bikeService, TruckService truckService, PlaneService planeService) {
+    public CommandLineRunnerImpl(CarService carService, BikeService bikeService, TruckService truckService, PlaneService planeService, VehiclePriceService vehiclePriceService) {
         this.carService = carService;
         this.bikeService = bikeService;
         this.truckService = truckService;
         this.planeService = planeService;
+        this.vehiclePriceService = vehiclePriceService;
     }
 
     @Override
@@ -39,6 +38,9 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
             planeService.findAllPlanes().forEach(System.out::println);
             planeService.findAllPlanesByModel("Boeing 747").forEach(System.out::println);
             truckService.findAllTruck().forEach(System.out::println);
+            System.out.println("Max price = " + vehiclePriceService.getMaxPrice());
+            System.out.println("Min price = " + vehiclePriceService.getMinPrice());
+            System.out.println("Avg price = " + vehiclePriceService.getAveragePrice());
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
